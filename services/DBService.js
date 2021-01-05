@@ -26,9 +26,9 @@ class DBService {
         return this.data.notes;
     }
 
-    addToDo(note) {
+    addNotes(note) {
         note.id = this.data.notes.length + 1;
-        this.data.Notes.push(note);
+        this.data.notes.push(note);
         return {
             message: "note added",
             notes: this.data.notes.length
@@ -36,17 +36,17 @@ class DBService {
     }
 
     deleteNotes(id) {
-        this.data.Notes = this.data.notes.filter(todo => todo.id != id)
+        this.data.notes = this.data.notes.filter(note => note.id != id)
         return {
             message: "note deleted",
             notes: this.data.notes.length
         }
     }
 
-    editNotes(note) {
-        this.data.Notes = this.data.notes.map(todo => {
-            if (todo.id === note.id) todo = note;
-            return todo;
+    updateNotes(note) {
+        this.data.notes = this.data.notes.map(_note => {
+            if (_note.id === note.id) _note = note;
+            return _note;
         });
         return {
             message: "note edited",

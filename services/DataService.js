@@ -3,7 +3,6 @@ const DBService = require("./DBService");
 class DataService {
 
     dbService;
-
     constructor() {
         this.dbService = new DBService();
     }
@@ -19,7 +18,7 @@ class DataService {
 
     addNotes(context) {
         try {
-            const response = this.dbService.addToDo(context.req.body.task);
+            const response = this.dbService.addNotes(context.req.body.note);
             context.res.status(200).json(response);
         } catch (error) {
             context.res.status(500).send(error);
@@ -35,9 +34,9 @@ class DataService {
         }
     }
 
-    editNotes(context) {
+    updateNotes(context) {
         try {
-            const response = this.dbService.editNotes(context.req.body.note);
+            const response = this.dbService.updateNotes(context.req.body.note);
             context.res.status(200).json(response);
         } catch (error) {
             context.res.status(500).send(error);

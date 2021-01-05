@@ -1,13 +1,18 @@
+const DataService = require("../services/DataService");
+
 module.exports = async function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
+    context.log('HTTP trigger function processed a POST request.');
+    const dataService = new DataService();
 
-    const name = (req.query.name || (req.body && req.body.name));
-    const responseMessage = name
-        ? "Hello, " + name + ". This HTTP triggered function executed successfully."
-        : "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.";
-
-    context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: responseMessage
-    };
+    if (req.body && req.body.note) {
+        context.res = {
+            status: 200,
+            body: dataService.addNotes(context)
+        };
+    } else {
+        context.res = {
+            status: 400,
+            body: "Please pass a note in request body"
+        };
+    }
 }
